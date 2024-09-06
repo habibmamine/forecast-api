@@ -1,10 +1,19 @@
 from fastapi import FastAPI
 import requests
-
+from fastapi.middleware.cors import CORSMiddleware
 from model import predict
 
 
 app = FastAPI()
+
+# Add CORS middleware to the FastAPI app to allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
